@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydration Tracker - Build Healthy Habits</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <h1 class="title">💧 Hydration Tracker</h1>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    🌙
+                </button>
+            </div>
+            <p class="subtitle">Build healthy hydration habits</p>
+        </header>
+
+        <!-- Daily Tip -->
+        <section class="tip-section">
+            <p class="tip-text" id="tipText">Loading your daily tip...</p>
+        </section>
+
+        <!-- Streak Counter -->
+        <section class="streak-section">
+            <div class="streak-card">
+                <div class="streak-icon">🔥</div>
+                <div class="streak-info">
+                    <p class="streak-label">Current Streak</p>
+                    <p class="streak-count" id="streakCount">0</p>
+                    <p class="streak-subtext">days</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <div class="progress-header">
+                <h2>Today's Hydration</h2>
+                <p class="progress-text" id="progressText">0 / 2000 ml</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <!-- Glass markers -->
+                    <div class="glass-markers">
+                        <div class="glass-marker" style="left: 12.5%;"></div>
+                        <div class="glass-marker" style="left: 25%;"></div>
+                        <div class="glass-marker" style="left: 37.5%;"></div>
+                        <div class="glass-marker" style="left: 50%;"></div>
+                        <div class="glass-marker" style="left: 62.5%;"></div>
+                        <div class="glass-marker" style="left: 75%;"></div>
+                        <div class="glass-marker" style="left: 87.5%;"></div>
+                    </div>
+                </div>
+                <p class="progress-subtext">Daily goal: 8 glasses (2000 ml)</p>
+            </div>
+        </section>
+
+        <!-- Drink Buttons Section -->
+        <section class="drinks-section">
+            <h3>Log Your Drink</h3>
+            <div class="drink-buttons">
+                <button class="drink-btn water-btn" data-drink="water" data-factor="1">
+                    <span class="drink-icon">💧</span>
+                    <span class="drink-name">Water</span>
+                </button>
+                <button class="drink-btn tea-btn" data-drink="tea" data-factor="0.8">
+                    <span class="drink-icon">🍵</span>
+                    <span class="drink-name">Tea</span>
+                </button>
+                <button class="drink-btn coffee-btn" data-drink="coffee" data-factor="0.5">
+                    <span class="drink-icon">☕</span>
+                    <span class="drink-name">Coffee</span>
+                </button>
+                <button class="drink-btn juice-btn" data-drink="juice" data-factor="0.9">
+                    <span class="drink-icon">🍊</span>
+                    <span class="drink-name">Juice</span>
+                </button>
+                <button class="drink-btn cocoa-btn" data-drink="cocoa" data-factor="0.6">
+                    <span class="drink-icon">🍫</span>
+                    <span class="drink-name">Cocoa</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Drink Stats Section -->
+        <section class="stats-section">
+            <h3>Today's Intake</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p class="stat-icon">💧</p>
+                    <p class="stat-label">Water</p>
+                    <p class="stat-value" id="waterCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-icon">🍵</p>
+                    <p class="stat-label">Tea</p>
+                    <p class="stat-value" id="teaCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-icon">☕</p>
+                    <p class="stat-label">Coffee</p>
+                    <p class="stat-value" id="coffeeCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-icon">🍊</p>
+                    <p class="stat-label">Juice</p>
+                    <p class="stat-value" id="juiceCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-icon">🍫</p>
+                    <p class="stat-label">Cocoa</p>
+                    <p class="stat-value" id="cocoaCount">0</p>
+                </div>
+                <div class="stat-card highlight">
+                    <p class="stat-icon">📊</p>
+                    <p class="stat-label">Total</p>
+                    <p class="stat-value" id="totalCount">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="action-section">
+            <button class="btn btn-primary" id="startNewDayBtn">
+                🌅 Start New Day
+            </button>
+            <button class="btn btn-secondary" id="resetBtn">
+                🔄 Reset Today
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Stay hydrated, stay healthy! 💙</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
