@@ -200,39 +200,6 @@
                     <input type="checkbox" id="notificationsToggle"> Enable Reminders
                 </label>
             </div>
-            <div class="settings-item reminder-settings hidden" id="reminderSettings">
-                <label>Reminder Times (Daytime Hours)</label>
-                <div class="reminder-time-inputs">
-                    <div class="time-input">
-                        <label for="reminderStartHour">Start Hour</label>
-                        <select id="reminderStartHour">
-                            <option value="6">6 AM</option>
-                            <option value="7">7 AM</option>
-                            <option value="8" selected>8 AM</option>
-                            <option value="9">9 AM</option>
-                            <option value="10">10 AM</option>
-                        </select>
-                    </div>
-                    <div class="time-input">
-                        <label for="reminderEndHour">End Hour</label>
-                        <select id="reminderEndHour">
-                            <option value="20">8 PM</option>
-                            <option value="21">9 PM</option>
-                            <option value="22" selected>10 PM</option>
-                            <option value="23">11 PM</option>
-                        </select>
-                    </div>
-                </div>
-                <label for="reminderInterval">Interval (minutes)</label>
-                <select id="reminderInterval">
-                    <option value="15">15 minutes</option>
-                    <option value="30" selected>30 minutes</option>
-                    <option value="45">45 minutes</option>
-                    <option value="60">1 hour</option>
-                    <option value="90">1.5 hours</option>
-                    <option value="120">2 hours</option>
-                </select>
-            </div>
             <div class="settings-item">
                 <label for="soundToggle">
                     <input type="checkbox" id="soundToggle"> Sound Effects

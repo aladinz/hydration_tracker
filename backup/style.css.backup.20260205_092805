@@ -791,65 +791,6 @@ body::before {
     margin-right: 8px;
 }
 
-.reminder-settings {
-    background-color: var(--bg-light-tertiary);
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    padding: 12px;
-    margin-top: 8px;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.reminder-settings label {
-    width: 100%;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-.reminder-time-inputs {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    margin-bottom: 12px;
-}
-
-.time-input {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.time-input label {
-    font-size: 0.85rem;
-    margin-bottom: 0;
-}
-
-.reminder-settings select,
-.settings-item select {
-    padding: 8px 12px;
-    border: 2px solid var(--border-light);
-    border-radius: 6px;
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    font-size: 0.9rem;
-    transition: var(--transition);
-    cursor: pointer;
-    width: 100%;
-}
-
-.reminder-settings select:focus,
-.settings-item select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.hidden {
-    display: none !important;
-}
-
 .btn {
     flex: 1;
     min-width: 150px;

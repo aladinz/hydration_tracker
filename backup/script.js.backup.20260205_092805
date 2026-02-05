@@ -129,51 +129,6 @@ function sendNotification(title, options = {}) {
     }
 }
 
-// ==================== Reminder System ====================
-let reminderIntervalId = null;
-
-function isWithinReminderHours() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    return currentHour >= state.reminderStartHour && currentHour < state.reminderEndHour;
-}
-
-function checkAndSendReminder() {
-    if (!state.notificationsEnabled || !isWithinReminderHours()) {
-        return;
-    }
-    
-    const messages = [
-        "💧 Time to hydrate! Drink some water.",
-        "🥤 Keep up the good work! Have a glass of water.",
-        "💙 Your body needs water. Take a sip!",
-        "🌊 Feeling thirsty? Time for a drink!",
-        "✨ Stay hydrated for better health!"
-    ];
-    
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    sendNotification("Hydration Reminder", {
-        body: randomMessage,
-        tag: 'hydration-reminder'
-    });
-}
-
-function startReminder() {
-    if (reminderIntervalId) {
-        stopReminder();
-    }
-    
-    const intervalMs = state.reminderIntervalMinutes * 60 * 1000;
-    reminderIntervalId = setInterval(checkAndSendReminder, intervalMs);
-}
-
-function stopReminder() {
-    if (reminderIntervalId) {
-        clearInterval(reminderIntervalId);
-        reminderIntervalId = null;
-    }
-}
-
 // ==================== State Management ====================
 const state = {
     hydrationTotal: 0,
@@ -183,9 +138,6 @@ const state = {
     dailyGoal: 2000,
     soundEnabled: true,
     notificationsEnabled: false,
-    reminderStartHour: 8,
-    reminderEndHour: 22,
-    reminderIntervalMinutes: 30,
     drinks: {
         water: 0,
         tea: 0,
@@ -260,10 +212,6 @@ const weeklyGrid = document.getElementById('weeklyGrid');
 const goalInput = document.getElementById('goalInput');
 const notificationsToggle = document.getElementById('notificationsToggle');
 const soundToggle = document.getElementById('soundToggle');
-const reminderSettings = document.getElementById('reminderSettings');
-const reminderStartHour = document.getElementById('reminderStartHour');
-const reminderEndHour = document.getElementById('reminderEndHour');
-const reminderInterval = document.getElementById('reminderInterval');
 const expandLogBtn = document.getElementById('expandLogBtn');
 const exportBtn = document.getElementById('exportBtn');
 
@@ -456,24 +404,8 @@ function renderUI() {
     updateStreakDisplay();
     updateDrinkCounts();
     updateTip();
-    updateReminderUI();
     renderDrinkLog();
     renderWeeklyStats();
-}
-
-function updateReminderUI() {
-    notificationsToggle.checked = state.notificationsEnabled;
-    soundToggle.checked = state.soundEnabled;
-    
-    if (state.notificationsEnabled) {
-        reminderSettings.classList.remove('hidden');
-    } else {
-        reminderSettings.classList.add('hidden');
-    }
-    
-    reminderStartHour.value = state.reminderStartHour;
-    reminderEndHour.value = state.reminderEndHour;
-    reminderInterval.value = state.reminderIntervalMinutes;
 }
 
 function updateStreakDisplay() {
@@ -588,7 +520,19 @@ function exportStats() {
 // ==================== Reminder Schedule ====================
 function startReminderSchedule() {
     if (!state.notificationsEnabled) return;
-    startReminder();
+    
+    // Check every 30 minutes
+    setInterval(() => {
+        const hour = new Date().getHours();
+        const percentage = (state.hydrationTotal / state.dailyGoal) * 100;
+        
+        // Remind between 7 AM and 9 PM if below 50%
+        if (hour >= 7 && hour < 21 && percentage < 50) {
+            sendNotification('Hydration Reminder 💧', { 
+                body: `You've had ${state.hydrationTotal}ml so far. Keep sipping!` 
+            });
+        }
+    }, 30 * 60 * 1000);
 }
 
 // ==================== Notification System ====================
@@ -660,33 +604,9 @@ function attachEventListeners() {
     notificationsToggle.addEventListener('change', (e) => {
         state.notificationsEnabled = e.target.checked;
         if (state.notificationsEnabled) {
-            reminderSettings.classList.remove('hidden');
             requestNotificationPermission();
-            startReminder();
-        } else {
-            reminderSettings.classList.add('hidden');
-            stopReminder();
         }
         saveToLocalStorage();
-    });
-    
-    reminderStartHour.addEventListener('change', (e) => {
-        state.reminderStartHour = parseInt(e.target.value);
-        saveToLocalStorage();
-    });
-    
-    reminderEndHour.addEventListener('change', (e) => {
-        state.reminderEndHour = parseInt(e.target.value);
-        saveToLocalStorage();
-    });
-    
-    reminderInterval.addEventListener('change', (e) => {
-        state.reminderIntervalMinutes = parseInt(e.target.value);
-        saveToLocalStorage();
-        if (state.notificationsEnabled) {
-            stopReminder();
-            startReminder();
-        }
     });
     
     soundToggle.addEventListener('change', (e) => {
